@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'The Children of Light Organization'),
+    'name' => env('APP_NAME', 'Blood Donors Management'),
 
     /*
     |--------------------------------------------------------------------------
