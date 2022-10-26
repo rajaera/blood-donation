@@ -35,21 +35,7 @@ class DonorController extends Controller {
 
     public function store(Request $request) {
 
-        $request->validate([
-            'first_name' => 'required|alpha_num|min:3|max:50',
-            'last_name' => 'alpha_num|min:3|max:50',
-
-            'address1' => 'required|alpha_num|min:3|max:50',
-            'address2' => 'alpha_num|min:3|max:50',
-            'address3' => 'alpha_num|min:3|max:50',
-            'city' => 'alpha_num|min:3|max:50',
-
-            'contact_number' => 'required|alpha_num|min:9|max:12',
-            'identity_number' => 'required|alpha_num|min:9|max:15',
-
-            'gender' => 'required|alpha_num|min:4|max:6',
-
-        ]);
+       
 
         $donor = new Donor();
         $donor->first_name = $request->input('first_name');
@@ -62,10 +48,11 @@ class DonorController extends Controller {
         $donor->identity_number = $request->input('identity_number');
         $donor->gender = $request->input('gender');
 
-        //$donor->save();
+        $donor->save();
 
 
         return redirect()->route('donor');
+        
     }
 
 

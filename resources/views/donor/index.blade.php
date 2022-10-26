@@ -23,8 +23,8 @@
                             <tr>
                                 <th scope="row"> {{ $counter }} </th>
                                 <td>{{ $donor->first_name }}</td>
-                                <td>{{ $user->last_name }}</td>
-                                <td>{{ $user->created_at }}</td>
+                                <td>{{ $donor->last_name }}</td>
+                                <td>{{ $donor->created_at }}</td>
                               </tr>
                             @endforeach
                           

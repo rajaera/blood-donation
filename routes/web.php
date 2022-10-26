@@ -28,4 +28,6 @@ Route::get('/donor', [App\Http\Controllers\DonorController::class, 'index'])->na
 
 Route::get('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
 
+Route::post('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
+
 Route::post('/donor/store', [App\Http\Controllers\DonorController::class, 'store'])->name('donor.store');
