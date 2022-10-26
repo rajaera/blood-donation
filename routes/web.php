@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DonorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 
+//Route::resource('/donor',DonorController::class)->only(['index' => 'donor','create' => 'donor.create', 'store' => 'donor.store']);
+
 Route::get('/donor', [App\Http\Controllers\DonorController::class, 'index'])->name('donor');
+
+Route::get('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
+
+Route::post('/donor/store', [App\Http\Controllers\DonorController::class, 'store'])->name('donor.store');
