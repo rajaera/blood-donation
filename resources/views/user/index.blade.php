@@ -19,8 +19,9 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
+                              @php($counter = $loop->index + 1)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row"> {{ $counter }} </th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at }}</td>
@@ -30,7 +31,7 @@
                           
                         </tbody>
                       </table>
-                </div>
+                </div>                
             </div>
         </div>
     </div>

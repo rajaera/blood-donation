@@ -15,7 +15,7 @@
                     @endif
 
                     <img src="{{ asset('images/the-children-of-light-organisation.png') }}" width="75">
-                    <span class="h3">The Children of Light Organization</span>
+                    <span class="h3">{{ __('The Children of Light Organization') }}</span>
                 </div>
             </div>
         </div>
