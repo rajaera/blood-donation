@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+
+Route::get('/donor', [App\Http\Controllers\DonorController::class, 'index'])->name('donor');
