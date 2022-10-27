@@ -20,8 +20,7 @@
                       <div>
                           @php
                               $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');
-                          @endphp
-                          on going camp is {{  $ongoing_camp_schedule_id }}
+                          @endphp                          
                       </div>
                 </div>
                 <div class="card-body">
