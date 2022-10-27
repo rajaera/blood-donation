@@ -1,3 +1,4 @@
+@inject('camp', 'App\Models\Camp')
 @extends('layouts.app')
 
 @section('content')
@@ -16,21 +17,26 @@
                             <th scope="col">Camp</th>
                             <th scope="col">Title</th>
                             <th scope="col">Comment</th>
-                            <th scope="col">Created At</th>                            
+                            <th scope="col">Created At</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">&nbsp;</th>                               
                           </tr>
                         </thead>
                         <tbody>
                             @foreach ($campingSchedules as $schedule)
                               @php
-                                $counter = $loop->index + 1;                                
+                                $counter = $loop->index + 1;  
+                                $campName = $camp::getCampNameById($schedule->camp_id);                              
                               @endphp
                             <tr>
                                 <th scope="row"> {{ $counter }} </th>
                                 <td>{{ $schedule->schedule_at }}</td>
-                                <td>{{ $schedule->camp_id }}</td>
+                                <td>{{ $campName }}</td>
                                 <td>{{ $schedule->title }}</td>
                                 <td>{{ $schedule->comment }}</td>
-                                <td>{{ $schedule->created_at }}</td>                                
+                                <td>{{ $schedule->created_at }}</td>  
+                                <td>{{ $schedule->is_done ? 'DONE' : 'YET' }}</td>   
+                                <td><a class="btn btn-outline-secondary" href="{{ route('camp-schedule.show', $schedule->id) }}" role="button" title="View Schedule"><i class="bi bi-eye"></i></a></td>                             
                               </tr>
                             @endforeach
                           
@@ -40,7 +46,7 @@
                 </div>        
                 <div>
                   @php
-                      $camp_id = session('ongoing_camp_id');
+                      $camp_id = session('ongoing_camp_schedule_id');
                   @endphp
                   on going camp is {{  $camp_id }}
               </div>        

@@ -1,3 +1,4 @@
+@inject('camp', 'App\Models\Camp')
 @extends('layouts.app')
 
 @section('content')
@@ -16,24 +17,28 @@
 
                     <img src="{{ asset('images/the-children-of-light-organisation.png') }}" width="75">
                     <span class="h3">{{ __('The Children of Light Organization') }}</span>
-                    &nbsp;    
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Select Ongoing Camp
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{{ route('donor.camp', 1) }}">Bopitiya Church</a>
-                            <a class="dropdown-item active" href="{{ route('donor.camp', 2) }}">Kerawalapitiya People's Pharmacy</a>
-                            <a class="dropdown-item" href="{{ route('donor.camp', 3) }}">Pamunugama Church RC</a>                          
-                        </div>
-                      </div>
-
                       <div>
                           @php
-                              $camp_id = session('ongoing_camp_id');
+                              $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');
                           @endphp
-                          on going camp is {{  $camp_id }}
+                          on going camp is {{  $ongoing_camp_schedule_id }}
                       </div>
+                </div>
+                <div class="card-body">
+                    @foreach ($progressingCampingSchedules as $schedule)
+                        @php
+                            $campName = $camp::getCampNameById($schedule->camp_id);  
+                        @endphp
+                        @if ($schedule->id == $ongoing_camp_schedule_id)
+                            <a href="{{ route('camp-schedule.show', $schedule->id) }}" class="btn btn-outline-danger btn-lg mt-1" role="button" aria-pressed="true">
+                                <i class="bi bi-play-circle"></i>&nbsp;{{ $schedule->title }} sheduled @ {{ $campName }} on {{ $schedule->schedule_at }}
+                            </a>
+                        @else
+                        <a href="{{ route('camp-schedule.show', $schedule->id) }}" class="btn btn-outline-secondary btn-lg mt-1" role="button" aria-pressed="true">
+                            {{ $schedule->title }} sheduled @ {{ $campName }} on {{ $schedule->schedule_at }}
+                        </a>
+                        @endif
+                    @endforeach         
                 </div>
             </div>
         </div>

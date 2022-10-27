@@ -22,4 +22,9 @@ class Camp extends Model
              5 => 'Mattumagala Church TCOL'
          ];
      }
+
+     public static function getCampNameById($id) {
+        $camps = self::getCamps();
+        return $camps[$id];
+     }
 }
