@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Donor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DonorController extends Controller {
     /**
@@ -36,7 +37,7 @@ class DonorController extends Controller {
     public function store(Request $request) {
 
        
-
+        
         $donor = new Donor();
         $donor->first_name = $request->input('first_name');
         $donor->last_name = $request->input('last_name');
@@ -47,6 +48,8 @@ class DonorController extends Controller {
         $donor->contact_number = $request->input('contact_number');
         $donor->identity_number = $request->input('identity_number');
         $donor->gender = $request->input('gender');
+
+        $donor->created_by = Auth::id();
 
         $donor->save();
 
