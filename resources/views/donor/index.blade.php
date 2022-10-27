@@ -43,7 +43,13 @@
                           
                         </tbody>
                       </table>
-                </div>                
+                </div>        
+                <div>
+                  @php
+                      $camp_id = session('ongoing_camp_id');
+                  @endphp
+                  on going camp is {{  $camp_id }}
+              </div>        
             </div>
         </div>
     </div>

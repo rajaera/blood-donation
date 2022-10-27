@@ -36,7 +36,13 @@ class DonorController extends Controller {
 
     public function store(Request $request) {
 
-       
+        $request->validate([
+            'first_name' => 'required|string',
+            'address1' => 'required|string',
+            'contact_number' => 'required|string|min:9|max:12',
+            'identity_number' => 'required|string:|min:9|max:15',
+            'gender' => 'required|string|min:4|max:6',
+        ]);
         
         $donor = new Donor();
         $donor->first_name = $request->input('first_name');
@@ -56,6 +62,11 @@ class DonorController extends Controller {
 
         return redirect()->route('donor');
         
+    }
+
+    public function camp(Request $request, $id) {
+        $request->session()->put('ongoing_camp_id', $id);
+        return redirect()->route('home');
     }
 
 

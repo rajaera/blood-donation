@@ -26,8 +26,17 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 
 Route::get('/donor', [App\Http\Controllers\DonorController::class, 'index'])->name('donor');
 
+Route::get('/donor/camp/{id}', [App\Http\Controllers\DonorController::class, 'camp'])->name('donor.camp');
+
 Route::get('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
 
 Route::post('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
 
 Route::post('/donor/store', [App\Http\Controllers\DonorController::class, 'store'])->name('donor.store');
+
+
+Route::get('/camp-schedule', [App\Http\Controllers\CampScheduleController::class, 'index'])->name('camp-schedule');
+
+Route::get('/camp-schedule/create', [App\Http\Controllers\CampScheduleController::class, 'create'])->name('camp-schedule.create');
+
+Route::post('/camp-schedule/store', [App\Http\Controllers\CampScheduleController::class, 'store'])->name('camp-schedule.store');
