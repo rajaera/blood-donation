@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\BloodDonation;
+use App\Models\CampSchedule;
 use App\Models\Donor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +44,8 @@ class DonorController extends Controller {
             'contact_number' => 'required|string|min:9|max:12',
             'identity_number' => 'required|string:|min:9|max:15',
             'gender' => 'required|string|min:4|max:6',
+            'blood_group_id' => 'integer',
+            'source_id' => 'integer',
         ]);
         
         $donor = new Donor();
@@ -55,10 +59,24 @@ class DonorController extends Controller {
         $donor->identity_number = $request->input('identity_number');
         $donor->gender = $request->input('gender');
         $donor->blood_group_id = $request->input('blood_group_id');
+        $donor->source_id = $request->input('source_id');
 
         $donor->created_by = Auth::id();
 
-        $donor->save();
+        if($donor->save() && $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id')) {
+            
+            $scheduledCamp = CampSchedule::find($ongoing_camp_schedule_id); 
+            /**
+             * Adding newly created donor to the donation list
+             */
+            $donationRecord = new BloodDonation();
+            $donationRecord->donor_id = $donor->id;
+            $donationRecord->camp_schedule_id = $scheduledCamp->id;
+            $donationRecord->created_by = Auth::id();
+            $donationRecord->save();
+
+
+        }
 
 
         return redirect()->route('donor');
