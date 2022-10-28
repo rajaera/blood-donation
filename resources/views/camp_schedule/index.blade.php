@@ -1,6 +1,10 @@
 @inject('camp', 'App\Models\Camp')
 @extends('layouts.app')
 
+@php
+  $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');      
+@endphp
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -12,6 +16,7 @@
                     <table class="table">
                         <thead>
                           <tr>
+                            <th scope="col"></th>
                             <th scope="col">#</th>
                             <th scope="col">Sheduled At</th>
                             <th scope="col">Camp</th>
@@ -26,10 +31,12 @@
                             @foreach ($campingSchedules as $schedule)
                               @php
                                 $counter = $loop->index + 1;  
-                                $campName = $camp::getCampNameById($schedule->camp_id);                              
+                                $campName = $camp::getCampNameById($schedule->camp_id);
+                                                         
                               @endphp
                             <tr>
-                                <th scope="row"> {{ $counter }} </th>
+                                <th scope="row">   @if ($ongoing_camp_schedule_id == $schedule->id) <span style="color: red;" title="Ongoing Scheduled Camp"><i class="bi bi-play"></i></span> @endif </th>
+                                <th scope="row"> {{ $counter }} </th>                                
                                 <td>{{ $schedule->schedule_at }}</td>
                                 <td>{{ $campName }}</td>
                                 <td>{{ $schedule->title }}</td>

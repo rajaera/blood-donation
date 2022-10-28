@@ -11,14 +11,14 @@ class BloodGroup extends Model
 
     public static function getGroups() {
         return [
-            1 => 'A RhD positive (A+)',
-            2 => 'A RhD negative (A-)',
-            3 => 'B RhD positive (B+)',
-            4 => 'B RhD negative (B-)',
-            5 => 'O RhD positive (O+)',
-            6 => 'O RhD negative (O-)',
-            7 => 'AB RhD positive (AB+)',
-            8 => 'AB RhD negative (AB-)'
+            1 => 'A+',
+            2 => 'A-',
+            3 => 'B+',
+            4 => 'B-',
+            5 => 'O+',
+            6 => 'O-',
+            7 => 'AB+',
+            8 => 'AB-'
         ];
     }
 

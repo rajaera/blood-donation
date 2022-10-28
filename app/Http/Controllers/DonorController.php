@@ -26,7 +26,7 @@ class DonorController extends Controller {
     public function index() 
     {
         return view('donor.index', [
-            'donors' => DB::table('donors')->paginate(5)
+            'donors' => DB::table('donors')->orderBy('created_at', 'DESC')->paginate(10)
         ]);
     }
 
@@ -54,6 +54,7 @@ class DonorController extends Controller {
         $donor->contact_number = $request->input('contact_number');
         $donor->identity_number = $request->input('identity_number');
         $donor->gender = $request->input('gender');
+        $donor->blood_group_id = $request->input('blood_group_id');
 
         $donor->created_by = Auth::id();
 
@@ -64,9 +65,12 @@ class DonorController extends Controller {
         
     }
 
-    public function camp(Request $request, $id) {
-        $request->session()->put('ongoing_camp_id', $id);
-        return redirect()->route('home');
+    public function show($id) {        
+        return view('donor.show', ['donor' => Donor::find($id)]);
+    }
+
+    public function edit($id) {
+        dd($id);
     }
 
 

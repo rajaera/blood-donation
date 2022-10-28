@@ -1,4 +1,12 @@
+@inject('camp', 'App\Models\Camp')
+@inject('source', 'App\Models\Source')
+@inject('campSchedule', 'App\Models\CampSchedule')
+@inject('bloodGroup', 'App\Models\BloodGroup')
+@inject('donor', 'App\Models\Donor')
 @extends('layouts.app')
+@php
+    $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');
+@endphp 
 
 @section('content')
 <div class="container">
@@ -10,7 +18,17 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('donor.store') }}">
                         @csrf
-
+                        <div class="mb-2">                           
+                            @if ($ongoing_camp_schedule_id)
+                                @php                                    
+                                    $scheduledCamp = $campSchedule::find($ongoing_camp_schedule_id); 
+                                    $campName = $camp::getCampNameById($scheduledCamp->camp_id);
+                                @endphp 
+                                <a href="{{ route('camp-schedule.show', $scheduledCamp->id) }}" class="btn btn-outline-danger btn-lg mt-1" role="button" aria-pressed="true">
+                                    <i class="bi bi-play-circle"></i>&nbsp;{{ $scheduledCamp->title }} sheduled @ {{ $campName }} on {{ $scheduledCamp->schedule_at }}
+                                </a>
+                            @endif                         
+                        </div>
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
@@ -123,13 +141,59 @@
                             </div>
                         </div>
 
+                        
+
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                             <div class="col-md-6">
-                                <input id="gender" name="gender" type="gender" class="form-control @error('gender') is-invalid @enderror" gender="gender" value="{{ old('gender') }}" required autocomplete="gender">
 
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    @foreach ($donor::getGenders() as $gKey => $gVal)
+                                    <label class="form-control @error('gender') is-invalid @enderror btn btn-outline-success" gender="gender">
+                                        <input type="radio" name="gender" autocomplete="off" value="{{ $gKey }}"> {{ $gVal }}
+                                    </label>
+                                    @endforeach               
+                                  </div>
                                 @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="blood_group_id" class="col-md-4 col-form-label text-md-right">{{ __('Blood Group') }}</label>
+
+                            <div class="col-md-6">
+                               
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    @foreach ($bloodGroup::getGroups() as $bgKey1 => $bgVal1)                                       
+                                        <label class="form-control @error('blood_group_id') is-invalid @enderror btn btn-outline-danger" blood_group_id="blood_group_id">
+                                            <input type="radio" name="blood_group_id" autocomplete="off" value="{{ $bgKey1 }}"> {{ $bgVal1 }}
+                                        </label>                                        
+                                    @endforeach
+                                  </div>
+                                @error('blood_group_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="source_id" class="col-md-4 col-form-label text-md-right">{{ __('Source') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="source_id" name="source_id" type="text" class="form-control @error('source_id') is-invalid @enderror" camp_id="source_id" value="{{ old('source_id') }}" required autocomplete="source_id" autofocus>
+                                    <option value="0">----Select Donor Source ----</option>
+                                    @foreach ($source::getSources() as $scrKey => $scrVal)
+                                        <option value="{{ $scrKey }}">{{ $scrVal }}</option>
+                                    @endforeach
+                                </select>                                
+                                @error('source_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

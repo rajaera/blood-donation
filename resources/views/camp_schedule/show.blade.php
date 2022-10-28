@@ -2,19 +2,25 @@
 @extends('layouts.app')
 
 @section('content')
+@php     
+    $campName = $camp::getCampNameById($schedule->camp_id);                            
+    $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');                    
+@endphp
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     {{ __('Show Camping Schedule') }} 
+                    @if ($ongoing_camp_schedule_id == $schedule->id)
+                    <a href="{{ route('camp-schedule.ongoingcamp', $schedule->id) }}" class="btn btn-outline-danger float-right" role="button" aria-pressed="true"><i class="bi bi-play"></i></i>&nbsp;Ongoing Scheduled Camp</a>
+                    @else
                     <a href="{{ route('camp-schedule.ongoingcamp', $schedule->id) }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-alarm"></i>&nbsp;Set as Ongoing Scheduled Camp</a>
+                    @endif
+                    
                 </div>
 
-                <div class="card-body">
-                            @php                                  
-                                $campName = $camp::getCampNameById($schedule->camp_id);                              
-                            @endphp
+                <div class="card-body">                            
                     <table class="table">
                         <tr>
                             <th scope="col">#</th>

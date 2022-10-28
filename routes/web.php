@@ -34,6 +34,10 @@ Route::post('/donor/create', [App\Http\Controllers\DonorController::class, 'crea
 
 Route::post('/donor/store', [App\Http\Controllers\DonorController::class, 'store'])->name('donor.store');
 
+Route::get('/donor/show/{id}', [App\Http\Controllers\DonorController::class, 'show'])->name('donor.show');
+
+Route::get('/donor/edit/{id}', [App\Http\Controllers\DonorController::class, 'edit'])->name('donor.edit');
+
 
 Route::get('/camp-schedule', [App\Http\Controllers\CampScheduleController::class, 'index'])->name('camp-schedule');
 
