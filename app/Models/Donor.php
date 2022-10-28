@@ -17,7 +17,7 @@ class Donor extends Model
      */
     protected $table = 'donors';
 
-    protected $fillable = ['first_name', 'last_name', 'address1', 'address2', 'address3', 'city', 'contact_number', 'identity_number', 'gender', 'updated_at', 'created_at', 'source_id', 'donation_camp_id'];
+    protected $fillable = ['first_name', 'last_name', 'address1', 'address2', 'address3', 'city', 'contact_number', 'identity_number', 'gender', 'updated_at', 'created_at', 'source_id', 'donation_camp_id', 'camp_schedule_id'];
 
     /**
      * The model's default values for attributes.
