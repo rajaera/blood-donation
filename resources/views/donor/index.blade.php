@@ -6,7 +6,11 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Donor List') }} <a href="{{ route('donor.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register Donor</a></div>
+                <div class="card-header">
+                  {{ __('Donor List') }} 
+                  <a href="{{ route('donor.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register Donor</a>
+                  <a href="{{ route('donor.export') }}" class="btn btn-outline-success float-right mr-1" role="button" aria-pressed="true"><i class="bi bi-file-spreadsheet-fill"></i>&nbsp;Export</a>
+                </div>
                 <div class="card-body">
                   <div class="row  float-right">
                     <div class="md-col-12"> 

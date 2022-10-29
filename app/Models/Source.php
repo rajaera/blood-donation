@@ -26,4 +26,10 @@ class Source extends Model
             9 => 'Navy'
         ];
     }
+
+    public static function getSourceById($id) {
+        $groups = self::getSources();
+
+        return $groups[$id];
+    }
 }

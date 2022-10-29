@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportDonor;
 use App\Http\Controllers\Controller;
 use App\Models\BloodDonation;
 use App\Models\CampSchedule;
@@ -9,6 +10,7 @@ use App\Models\Donor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DonorController extends Controller
 {
@@ -109,5 +111,9 @@ class DonorController extends Controller
     public function edit($id)
     {
         dd($id);
+    }
+
+    public function export() {
+        return Excel::download(new ExportDonor, 'donors.xlsx');
     }
 }
