@@ -13,7 +13,7 @@
                       <form class="form-inline" method="GET">
                         <div class="form-group mb-2">
                           <label for="filter" class="col-md-2 col-form-label mr-1">Filter</label>
-                          <input type="text" class="form-control" id="filter" name="filter" placeholder="Product name..." value="{{ $filter }}">
+                          <input type="text" class="form-control" id="filter" name="filter" placeholder="Search Donors..." value="{{ $filter }}">
                         </div>
                         <button type="submit" class="btn btn-outline-secondary mb-2 mr-1">Search</button>
                       </form>

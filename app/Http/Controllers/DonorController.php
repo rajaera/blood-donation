@@ -42,7 +42,7 @@ class DonorController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->paginate(5);
         } else {
-            $donors = DB::table('donors')->paginate(5);
+            $donors = DB::table('donors') ->orderBy('created_at', 'DESC')->paginate(5);
         }
 
         return view('donor.index')->with('donors', $donors)->with('filter', $filter);
