@@ -7,7 +7,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Donor List') }} <a href="{{ route('donor.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register Donor</a></div>
-
+                <div class="card-body">
+                  <div class="row  float-right">
+                    <div class="md-col-12"> 
+                      <form class="form-inline" method="GET">
+                        <div class="form-group mb-2">
+                          <label for="filter" class="col-md-2 col-form-label mr-1">Filter</label>
+                          <input type="text" class="form-control" id="filter" name="filter" placeholder="Product name..." value="{{ $filter }}">
+                        </div>
+                        <button type="submit" class="btn btn-outline-secondary mb-2 mr-1">Search</button>
+                      </form>
+                    </div>
+                  </div>
+                  
+                </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
@@ -49,6 +62,16 @@
                         </tbody>
                       </table>
                 </div> 
+                
+                  <div class="card-footer">
+                    <div class="row  float-right">
+                      <div class="md-col-12"> 
+                        {!! $donors->withQueryString()->links() !!}
+                      </div>
+                    </div>
+                  </div>
+                
+                
             </div>
         </div>
     </div>

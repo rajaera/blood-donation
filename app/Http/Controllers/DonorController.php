@@ -26,11 +26,26 @@ class DonorController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('donor.index', [
-            'donors' => DB::table('donors')->orderBy('created_at', 'DESC')->paginate(10)
-        ]);
+
+        $filter = $request->query('filter');
+
+        if (!empty($filter)) {
+            $donors = DB::table('donors')                
+                ->orWhere('first_name', 'like',  '%'.$filter.'%')
+                ->orWhere('last_name', 'like',  '%'.$filter.'%')
+                ->orWhere('contact_number', 'like', '%'.$filter.'%')
+                ->orWhere('address1', 'like', '%'.$filter.'%')
+                ->orWhere('city', 'like', '%'.$filter.'%')
+                ->orWhere('gender', 'like', '%'.$filter.'%')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(5);
+        } else {
+            $donors = DB::table('donors')->paginate(5);
+        }
+
+        return view('donor.index')->with('donors', $donors)->with('filter', $filter);
     }
 
     public function create()
