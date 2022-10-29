@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class DonorController extends Controller {
+class DonorController extends Controller
+{
     /**
      * Create a new controller instance.
      *
@@ -25,18 +26,20 @@ class DonorController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function index() 
+    public function index()
     {
         return view('donor.index', [
             'donors' => DB::table('donors')->orderBy('created_at', 'DESC')->paginate(10)
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('donor.create');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         $request->validate([
             'first_name' => 'required|string',
@@ -47,7 +50,7 @@ class DonorController extends Controller {
             'blood_group_id' => 'integer',
             'source_id' => 'integer',
         ]);
-        
+
         $donor = new Donor();
         $donor->first_name = $request->input('first_name');
         $donor->last_name = $request->input('last_name');
@@ -63,33 +66,33 @@ class DonorController extends Controller {
 
         $donor->created_by = Auth::id();
 
-        if($donor->save() && $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id')) {
-            
-            $scheduledCamp = CampSchedule::find($ongoing_camp_schedule_id); 
+
+        if ($donor->save() && $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id')) {
             /**
-             * Adding newly created donor to the donation list
+             * If there is an ongoing camp is beign set then add the donor to the donation list as well
              */
-            $donationRecord = new BloodDonation();
-            $donationRecord->donor_id = $donor->id;
-            $donationRecord->camp_schedule_id = $scheduledCamp->id;
-            $donationRecord->created_by = Auth::id();
-            $donationRecord->save();
-
-
+            $scheduledCamp = CampSchedule::find($ongoing_camp_schedule_id);
+            /**
+             * Create donation record for the donor
+             */
+            $donationRecord = BloodDonation::create([
+                'donor_id' => $donor->id,
+                'camp_schedule_id' => $scheduledCamp->id,
+                'created_by' => Auth::id()
+            ]);            
         }
 
 
         return redirect()->route('donor');
-        
     }
 
-    public function show($id) {        
+    public function show($id)
+    {
         return view('donor.show', ['donor' => Donor::find($id)]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         dd($id);
     }
-
-
 }

@@ -15,4 +15,6 @@ class BloodDonation extends Model
      * @var string
      */
     protected $table = 'blood_donations';
+
+    protected $fillable = ['donor_id', 'camp_schedule_id', 'created_by'];
 }
