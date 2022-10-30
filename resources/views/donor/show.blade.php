@@ -62,6 +62,10 @@
                         </tr>                         
                       </table>
                 </div> 
+
+                <div>
+                    {{ count($donor->donations) }}
+                </div>
             </div>
         </div>
     </div>

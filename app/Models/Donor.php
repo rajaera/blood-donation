@@ -18,12 +18,20 @@ class Donor extends Model
     protected $table = 'donors';
 
     protected $fillable = ['first_name', 'last_name', 'address1', 'address2', 'address3', 'city', 'contact_number', 'identity_number', 'gender',  'source_id' , 'blood_group_id'];
-    
+
 
     public static function getGenders() {
         return [
             'MALE' => 'MALE',
             'FEMALE' => 'FEMALE'
         ];
+    }
+
+    /**
+     *@return BloodDonation
+     */
+    public function donations()
+    {
+        return $this->hasMany(BloodDonation::class);
     }
 }

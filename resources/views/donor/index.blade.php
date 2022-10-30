@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-lg-10">
             <div class="card">
                 <div class="card-header">
                   {{ __('Donor List') }} 
@@ -70,7 +70,10 @@
                                 <td>{{ $donor->identity_number }}</td>
                                 <td>{{  $donor->source_id ? $source::getSourceById($donor->source_id): '' }}</td>
                                 <td style="color: red;font-weight: bold;">{{ $donor->blood_group_id ? $bloodGroup::getNameById($donor->blood_group_id) : '' }}</td>
-                                <td><a class="btn btn-outline-secondary" href="{{ route('donor.show', $donor->id) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a></td>                             
+                                <td>
+                                  <a class="btn btn-outline-secondary" href="{{ route('donor.show', $donor->id) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a>
+                                  <a class="btn btn-outline-secondary" href="{{ route('donor.edit', $donor->id) }}" role="button" title="Edit Donor"><i class="bi bi-pencil-fill"></i></a>  
+                                </td>                             
                               </tr>
                             @endforeach
                           
