@@ -1,4 +1,5 @@
 @inject('bloodGroup', 'App\Models\BloodGroup')
+@inject('source', 'App\Models\Source')
 @extends('layouts.app')
 
 @section('content')
@@ -19,6 +20,15 @@
                           <label for="filter" class="col-md-2 col-form-label mr-1">Filter</label>
                           <input type="text" class="form-control" id="filter" name="filter" placeholder="Search Donors..." value="{{ $filter }}">
                         </div>
+                        <div class="form-group mb-2 mr-1">
+                          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            @foreach ($bloodGroup::getGroups() as $bgKey1 => $bgVal1)                                       
+                                <label class="form-control @error('blood_group_id') is-invalid @enderror btn btn-outline-danger" blood_group_id="blood_group_id">
+                                    <input type="radio" name="blood_group_id" autocomplete="off" value="{{ $bgKey1 }}"  @if ($bloodGroupFilterId == $bgKey1) checked="checked"  @endif> {{ $bgVal1 }}
+                                </label>                                        
+                            @endforeach
+                          </div>
+                        </div>                        
                         <button type="submit" class="btn btn-outline-secondary mb-2 mr-1">Search</button>
                       </form>
                     </div>
@@ -37,6 +47,7 @@
                             <th scope="col">Town</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Identity Number</th>   
+                            <th scope="col">Source</th>
                             <th scope="col">Blood Group</th>  
                             <th scope="col">&nbsp;</th>   
                           </tr>
@@ -57,6 +68,7 @@
                                 <td>{{ $donor->city }}</td>
                                 <td style="color: green;"><i class="bi bi-gender-{{ strtolower($donor->gender) }}" title="{{ $donor->gender }}"></i></td>
                                 <td>{{ $donor->identity_number }}</td>
+                                <td>{{  $donor->source_id ? $source::getSourceById($donor->source_id): '' }}</td>
                                 <td style="color: red;font-weight: bold;">{{ $donor->blood_group_id ? $bloodGroup::getNameById($donor->blood_group_id) : '' }}</td>
                                 <td><a class="btn btn-outline-secondary" href="{{ route('donor.show', $donor->id) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a></td>                             
                               </tr>

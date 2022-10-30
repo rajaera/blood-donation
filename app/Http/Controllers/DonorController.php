@@ -32,6 +32,7 @@ class DonorController extends Controller
     {
 
         $filter = $request->query('filter');
+        $bloodGroupFilterId =  $request->query('blood_group_id');
 
         if (!empty($filter)) {
             $donors = DB::table('donors')                
@@ -40,14 +41,24 @@ class DonorController extends Controller
                 ->orWhere('contact_number', 'like', '%'.$filter.'%')
                 ->orWhere('address1', 'like', '%'.$filter.'%')
                 ->orWhere('city', 'like', '%'.$filter.'%')
-                ->orWhere('gender', 'like', '%'.$filter.'%')
+                ->orWhere('gender', '=', strtoupper($filter))
                 ->orderBy('created_at', 'DESC')
-                ->paginate(5);
-        } else {
-            $donors = DB::table('donors') ->orderBy('created_at', 'DESC')->paginate(5);
+                ->paginate(10);
+        } 
+        
+        if (!empty($bloodGroupFilterId)) {
+            $donors = DB::table('donors')                
+                ->orWhere('blood_group_id', '=',  $bloodGroupFilterId)                
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+            
         }
 
-        return view('donor.index')->with('donors', $donors)->with('filter', $filter);
+        if(!isset($donors)) {
+            $donors = DB::table('donors') ->orderBy('created_at', 'DESC')->paginate(10);
+        }
+
+        return view('donor.index')->with('donors', $donors)->with('filter', $filter)->with('bloodGroupFilterId', $bloodGroupFilterId);
     }
 
     public function create()
