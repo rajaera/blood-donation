@@ -29,12 +29,10 @@ class Donor extends Model
         'donation_camp_id' => 1
     ];
 
-
     public static function getGenders() {
         return [
             'MALE' => 'MALE',
             'FEMALE' => 'FEMALE'
         ];
     }
-
 }
