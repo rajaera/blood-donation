@@ -38,6 +38,8 @@ Route::get('/donor/show/{id}', [App\Http\Controllers\DonorController::class, 'sh
 
 Route::get('/donor/edit/{id}', [App\Http\Controllers\DonorController::class, 'edit'])->name('donor.edit');
 
+Route::put('/donor/update/{id}', [App\Http\Controllers\DonorController::class, 'update'])->name('donor.update');
+
 Route::get('/donor/export', [App\Http\Controllers\DonorController::class, 'export'])->name('donor.export');
 
 

@@ -17,17 +17,8 @@ class Donor extends Model
      */
     protected $table = 'donors';
 
-    protected $fillable = ['first_name', 'last_name', 'address1', 'address2', 'address3', 'city', 'contact_number', 'identity_number', 'gender', 'updated_at', 'created_at', 'source_id', 'donation_camp_id', 'camp_schedule_id'];
-
-    /**
-     * The model's default values for attributes.
-     *
-     * @var array
-     */
-    protected $attributes = [
-        'source_id' => 1,
-        'donation_camp_id' => 1
-    ];
+    protected $fillable = ['first_name', 'last_name', 'address1', 'address2', 'address3', 'city', 'contact_number', 'identity_number', 'gender',  'source_id' , 'blood_group_id'];
+    
 
     public static function getGenders() {
         return [

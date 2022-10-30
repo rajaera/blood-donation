@@ -24,18 +24,16 @@ class StoreDonor extends FormRequest
     public function rules()
     {
         return [
-            //'first_name' => 'required',
-            //'last_name' => 'min:3|max:50',
-
-            //'address1' => 'required',
-            //'address2' => 'min:3|max:50',
-           // 'address3' => 'min:3|max:50',
-          //  'city' => 'min:3|max:50',
-
-            //'contact_number' => 'required',
-           // 'identity_number' => 'required',
-
-            //'gender' => 'required',
+            'first_name' => 'required|string',
+            'address1' => 'required|string',
+            'address2' => 'string|max:50',
+            'address3' => 'string|max:50',
+            'city' => 'string|max:50',
+            'contact_number' => 'required|string|min:9|max:12',
+            'identity_number' => 'required|string:|min:9|max:15',
+            'gender' => 'required|string|min:4|max:6',
+            'blood_group_id' => 'integer',
+            'source_id' => 'integer',
 
         ];
     }

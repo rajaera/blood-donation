@@ -1,3 +1,4 @@
+@inject('source', 'App\Models\Source')
 @inject('bloodGroup', 'App\Models\BloodGroup')
 @extends('layouts.app')
 
@@ -15,7 +16,7 @@
                             @php                                  
                                 
                                 $fullName = implode(' ', array_filter([$donor->first_name, $donor->last_name]));  
-                                $fullAddress =  implode(' ', array_filter([$donor->address1, $donor->address1, $donor->address3]));                           
+                                $fullAddress =  implode(' ', array_filter([$donor->address1, $donor->address2, $donor->address3]));                           
                             @endphp
                     <table class="table">
                         <tr>
@@ -32,7 +33,7 @@
                         </tr>
                         <tr>
                             <th scope="col">Residence Address</th>
-                            <th scope="row"> {{ $donor->fullAddress }} </th>
+                            <th scope="row"> {{  $fullAddress }} </th>
                         </tr>
 
                         <tr>
@@ -46,11 +47,15 @@
                         <tr>
                             <th scope="col">Identity Number</th>
                             <td>{{ $donor->identity_number }}</td>
-                        </tr>  
+                        </tr>                           
                         <tr>
                             <th scope="col">Blood Group</th>  
                             <td style="color: red;font-weight: bold;">{{ $donor->blood_group_id ? $bloodGroup::getNameById($donor->blood_group_id) : '' }}</td>
                         </tr> 
+                        <tr>
+                            <th scope="col">Source</th>
+                            <td>{{  $donor->source_id ? $source::getSourceById($donor->source_id): '' }}</td>
+                        </tr>
                         <tr>
                             <th scope="col">Created At</th>
                             <td>{{ date('d/m/Y', strtotime($donor->created_at)) }}</td>
