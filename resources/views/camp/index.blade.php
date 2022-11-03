@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card">
@@ -28,7 +28,7 @@
                             <tr>
                                 <th scope="row"> {{ $counter }} </th>                                
                                 <td>{{ $camp->name }}</td>
-                                <td>{{ $donor->description }}</td>
+                                <td>{{ $camp->description }}</td>
                                 <td>{{ date('d/m/Y', strtotime($camp->created_at)) }}</td>                                
                                 <td>
                                   <a class="btn btn-outline-secondary" href="{{ route('camp.show', $camp->id) }}" role="button" title="View Camp"><i class="bi bi-eye"></i></a>
@@ -45,7 +45,7 @@
                   <div class="card-footer">
                     <div class="row  float-right">
                       <div class="md-col-12"> 
-                        {!! $donors->withQueryString()->links() !!}
+                        {!! $camps->withQueryString()->links() !!}
                       </div>
                     </div>
                   </div>

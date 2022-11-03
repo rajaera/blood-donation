@@ -24,17 +24,15 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 
 Route::get('/camp', [App\Http\Controllers\CampController::class, 'index'])->name('camp');
 
-Route::get('/camp', [App\Http\Controllers\CampController::class, 'create'])->name('create');
+Route::get('/camp/create', [App\Http\Controllers\CampController::class, 'create'])->name('camp.create');
 
-Route::get('/camp', [App\Http\Controllers\CampController::class, 'show'])->name('show');
+Route::get('/camp/show/{id}', [App\Http\Controllers\CampController::class, 'show'])->name('camp.show');
 
-Route::get('/camp', [App\Http\Controllers\CampController::class, 'edit'])->name('edit');
+Route::get('/camp/edit/{id}', [App\Http\Controllers\CampController::class, 'edit'])->name('camp.edit');
 
 //Route::resource('/donor',DonorController::class)->only(['index' => 'donor','create' => 'donor.create', 'store' => 'donor.store']);
 
 Route::get('/donor', [App\Http\Controllers\DonorController::class, 'index'])->name('donor');
-
-Route::get('/donor/camp/{id}', [App\Http\Controllers\DonorController::class, 'camp'])->name('donor.camp');
 
 Route::get('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
 
