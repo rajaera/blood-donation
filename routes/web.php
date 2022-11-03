@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.root');
 
 Auth::routes();
 
@@ -30,7 +30,7 @@ Route::get('/donor/camp/{id}', [App\Http\Controllers\DonorController::class, 'ca
 
 Route::get('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
 
-Route::post('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
+//Route::post('/donor/create', [App\Http\Controllers\DonorController::class, 'create'])->name('donor.create');
 
 Route::post('/donor/store', [App\Http\Controllers\DonorController::class, 'store'])->name('donor.store');
 
