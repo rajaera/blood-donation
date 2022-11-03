@@ -25,4 +25,9 @@ class CampController extends Controller
     {
         return view('camp.index', ['camps' => Camp::findAll()]);
     }
+
+    public function create() 
+    {
+        
+    }
 }
