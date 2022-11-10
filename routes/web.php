@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampController;
+use App\Http\Controllers\CampScheduleController;
 use App\Http\Controllers\DonorController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +55,7 @@ Route::get('/donor/export', [App\Http\Controllers\DonorController::class, 'expor
 */
 Route::resource('donor', DonorController::class);
 
-
+/*
 Route::get('/camp-schedule', [App\Http\Controllers\CampScheduleController::class, 'index'])->name('camp-schedule');
 
 Route::get('/camp-schedule/show/{id}', [App\Http\Controllers\CampScheduleController::class, 'show'])->name('camp-schedule.show');
@@ -64,3 +65,6 @@ Route::get('/camp-schedule/ongoingcamp/{id}', [App\Http\Controllers\CampSchedule
 Route::get('/camp-schedule/create', [App\Http\Controllers\CampScheduleController::class, 'create'])->name('camp-schedule.create');
 
 Route::post('/camp-schedule/store', [App\Http\Controllers\CampScheduleController::class, 'store'])->name('camp-schedule.store');
+*/
+
+Route::resource('camp-schedule', CampScheduleController::class);
