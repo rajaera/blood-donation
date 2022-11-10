@@ -29,6 +29,10 @@ class CampController extends Controller
 
     public function create() 
     {
+        return view('camp.create');
+    }
 
+    public function store(Request $request) {
+        return redirect()->route('camp');
     }
 }
