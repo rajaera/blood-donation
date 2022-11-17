@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                   {{ __('Camp List') }} 
-                  <a href="{{ route('camp.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register New Camp</a>                  
+                  <a href="{{ route('blood-camp.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register New Camp</a>                  
                 </div>                
                 <div class="card-body">
                     <table class="table">
@@ -31,8 +31,8 @@
                                 <td>{{ $camp->description }}</td>
                                 <td>{{ date('d/m/Y', strtotime($camp->created_at)) }}</td>                                
                                 <td>
-                                  <a class="btn btn-outline-secondary" href="{{ route('camp.show', $camp->id) }}" role="button" title="View Camp"><i class="bi bi-eye"></i></a>
-                                  <a class="btn btn-outline-secondary" href="{{ route('camp.edit', $camp->id) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
+                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.show', $camp->id) }}" role="button" title="View Camp"><i class="bi bi-eye"></i></a>
+                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.edit', $camp->id) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
                                 </td>                             
                               </tr>
                             @endforeach

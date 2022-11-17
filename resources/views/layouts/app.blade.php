@@ -40,7 +40,7 @@
                     <ul class="navbar-nav ml-auto">
                         @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('camp') }}" role="button" aria-expanded="false" v-pre>
+                            <a class="nav-link" href="{{ route('blood-camp') }}" role="button" aria-expanded="false" v-pre>
                                 {{ __('Camps') }}
                             </a>
                         </li>

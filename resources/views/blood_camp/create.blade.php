@@ -7,7 +7,7 @@
                 <div class="card-header">{{ __('Register New Camp') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('camp.store') }}">
+                    <form method="POST" action="{{ route('blood_camp.store') }}">
                         @csrf
                         @include('camp.partials.form')
 
