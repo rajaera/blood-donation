@@ -24,7 +24,8 @@ class BloodCampController extends Controller
      */
     public function index()
     {
-        return view('blood_camp.index', ['camps' =>  DB::table('blood_camps')->orderBy('name', 'ASC')->paginate(10)]);
+        return 'camps';
+        //return view('blood_camp.index', ['camps' =>  DB::table('blood_camps')->orderBy('name', 'ASC')->paginate(10)]);
     }
 
     /**
