@@ -43,7 +43,7 @@
                                 <td>{{ $schedule->comment }}</td>
                                 <td>{{ $schedule->created_at }}</td>  
                                 <td>{{ $schedule->is_done ? 'DONE' : 'YET' }}</td>   
-                                <td><a class="btn btn-outline-secondary" href="{{ route('camp-schedule.show', $schedule->id) }}" role="button" title="View Schedule"><i class="bi bi-eye"></i></a></td>                             
+                                <td><a class="btn btn-outline-secondary" href="{{ route('camp-schedule.show', ['camp_schedule' => $schedule->id]) }}" role="button" title="View Schedule"><i class="bi bi-eye"></i></a></td>                             
                               </tr>
                             @endforeach
                           

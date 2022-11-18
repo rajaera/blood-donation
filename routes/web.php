@@ -29,8 +29,10 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 //Route::get('/blood-camp', [App\Http\Controllers\BloodCampController::class, 'index'])->name('blood-camp.index');
 //Route::post('/blood-camp', [App\Http\Controllers\BloodCampController::class, 'store'])->name('blood-camp.store');
 
-Route::resource('blood-camp', BloodCampController::class);
+Route::resource('blood-camp', BloodCampController::class)->except(['show']);
 
 Route::resource('donor', DonorController::class);
 
 Route::resource('camp-schedule', CampScheduleController::class);
+
+Route::get('/camp-schedule/ongoingcamp/{schedule_id}',  [App\Http\Controllers\CampScheduleController::class, 'ongoingcamp'])->name('camp-schedule.ongoingcamp');

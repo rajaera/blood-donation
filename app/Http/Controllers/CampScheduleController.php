@@ -57,12 +57,13 @@ class CampScheduleController extends Controller {
         return redirect()->route('camp-schedule');
     }
 
-    public function show($id) {
-        return view('camp_schedule.show', ['schedule' => CampSchedule::find($id)]);
+    public function show($id) {      
+        
+        return view('camp_schedule.show', ['schedule' => CampSchedule::findOrFail($id)]);
     }
 
     public function ongoingcamp(Request $request, $id) {
         $request->session()->put('ongoing_camp_schedule_id', $id);
-        return redirect()->route('camp-schedule.show',['id' => $id]);
+        return redirect()->route('camp-schedule.show',['camp_schedule' => $id]);
     }
 }
