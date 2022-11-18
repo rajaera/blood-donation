@@ -7,9 +7,9 @@
                 <div class="card-header">{{ __('Register New Camp') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('blood_camp.store') }}">
+                    <form method="POST" action="{{ route('blood-camp.store') }}">
                         @csrf
-                        @include('camp.partials.form')
+                        @include('blood_camp.partials.form')
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

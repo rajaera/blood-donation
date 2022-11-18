@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBloodCamp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +35,7 @@ class BloodCampController extends Controller
      */
     public function create()
     {
-        //
+        return view('blood_camp.create');
     }
 
     /**
@@ -43,7 +44,7 @@ class BloodCampController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBloodCamp $request)
     {
         //
     }
