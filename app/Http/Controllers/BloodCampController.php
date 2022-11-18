@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBloodCamp;
+use App\Models\BloodCamp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -46,7 +48,16 @@ class BloodCampController extends Controller
      */
     public function store(StoreBloodCamp $request)
     {
-        //
+        $validated = $request->validated();
+
+        $camp = new BloodCamp();
+        $camp->fill($validated);
+
+        $camp->created_by = Auth::id();
+
+        $camp->save();
+
+       return redirect()->route('blood-camp');
     }
 
     /**

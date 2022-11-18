@@ -16,4 +16,6 @@ class BloodCamp extends Model
      * @var string
      */
     protected $table = 'blood_camps';
+
+    protected $fillable = ['name', 'description'];
 }

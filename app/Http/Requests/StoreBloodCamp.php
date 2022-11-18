@@ -13,7 +13,7 @@ class StoreBloodCamp extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class StoreBloodCamp extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
+            'name' => 'required|string|min:5|max:255',
             'description' => 'required|string|max:255',           
         ];
     }
