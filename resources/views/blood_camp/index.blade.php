@@ -31,8 +31,8 @@
                                 <td>{{ $camp->description }}</td>
                                 <td>{{ date('d/m/Y', strtotime($camp->created_at)) }}</td>                                
                                 <td>
-                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.show', $camp->id) }}" role="button" title="View Camp"><i class="bi bi-eye"></i></a>
-                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.edit', $camp->id) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
+                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.show', ['blood_camp' => $camp->id]) }}" role="button" title="View Camp"><i class="bi bi-eye"></i></a>
+                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.edit', ['blood_camp' => $camp->id]) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
                                 </td>                             
                               </tr>
                             @endforeach

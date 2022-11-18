@@ -79,7 +79,7 @@ class BloodCampController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('blood_camp.edit', ['camp' => BloodCamp::findOrFail($id)]);
     }
 
     /**
