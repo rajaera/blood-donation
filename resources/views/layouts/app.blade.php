@@ -40,17 +40,17 @@
                     <ul class="navbar-nav ml-auto">
                         @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('blood-camp') }}" role="button" aria-expanded="false" v-pre>
+                            <a class="nav-link" href="{{ route('blood-camp.index') }}" role="button" aria-expanded="false" v-pre>
                                 {{ __('Camps') }}
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('camp-schedule') }}" role="button" aria-expanded="false" v-pre>
+                            <a class="nav-link" href="{{ route('camp-schedule.index') }}" role="button" aria-expanded="false" v-pre>
                                 {{ __('Camping Schedule') }}
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('donor') }}" role="button" aria-expanded="false" v-pre>
+                            <a class="nav-link" href="{{ route('donor.index') }}" role="button" aria-expanded="false" v-pre>
                                 {{ __('Donors') }}
                             </a>
                         </li>
