@@ -25,8 +25,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 
 
+//Route::get('/blood-camp', [App\Http\Controllers\BloodCampController::class, 'index'])->name('blood-camp');
+//Route::get('/blood-camp', [App\Http\Controllers\BloodCampController::class, 'index'])->name('blood-camp.index');
+//Route::post('/blood-camp', [App\Http\Controllers\BloodCampController::class, 'store'])->name('blood-camp.store');
 
-Route::resource('blood-camp', BloodCampController::class);
+Route::resource('blood-camp', BloodCampController::class,[
+    'names' => [
+        'index' => 'blood-camp',        
+    ]
+]);
 
 Route::resource('donor', DonorController::class);
 
