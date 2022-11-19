@@ -62,8 +62,19 @@ class CampScheduleController extends Controller {
         return view('camp_schedule.show', ['schedule' => CampSchedule::findOrFail($id)]);
     }
 
+    /**
+     * Set an ongoing sheduled camp, this will also take when create donor as thier ongoing scheduled camp
+     * If same schedule camp id come as request it will be toggled
+     */
     public function ongoingcamp(Request $request, $id) {
-        $request->session()->put('ongoing_camp_schedule_id', $id);
+        //toggle session
+        if($request->session()->get('ongoing_camp_schedule_id') && $request->session()->get('ongoing_camp_schedule_id') == $id) {
+            //unset the session
+            $request->session()->forget('ongoing_camp_schedule_id');
+        } else {
+            $request->session()->put('ongoing_camp_schedule_id', $id);
+        }
+        
         return redirect()->route('camp-schedule.show',['camp_schedule' => $id]);
     }
 }

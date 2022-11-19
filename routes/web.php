@@ -32,6 +32,7 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 Route::resource('blood-camp', BloodCampController::class)->except(['show']);
 
 Route::resource('donor', DonorController::class);
+Route::get('/donor/export',  [App\Http\Controllers\DonorController::class, 'export'])->name('donor.export');
 
 Route::resource('camp-schedule', CampScheduleController::class);
 
