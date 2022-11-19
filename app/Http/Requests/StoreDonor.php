@@ -25,6 +25,7 @@ class StoreDonor extends FormRequest
     {
         return [
             'first_name' => 'required|string',
+            'last_name' => 'string|min:3',
             'address1' => 'required|string',
             'address2' => 'string|max:50',
             'address3' => 'string|max:50',

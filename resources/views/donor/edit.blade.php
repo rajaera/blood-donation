@@ -15,7 +15,7 @@
                 <div class="card-header">{{ __('Edit Donor') }} {{ $donor->id }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('donor.update',['id' => $donor->id]) }}">
+                    <form method="POST" action="{{ route('donor.update',['donor' => $donor->id]) }}">
                         @csrf
                         @method('PUT')                        
                         @include('donor.partials.form')

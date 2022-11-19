@@ -9,7 +9,7 @@
         </a>
     @else
         <div class="alert alert-info" role="alert">
-            There is no donation camp is being selected!
+            There is no donation camp schedule has being selected!
         </div>
     @endif                         
 </div>

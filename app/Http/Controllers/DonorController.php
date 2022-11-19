@@ -130,7 +130,7 @@ class DonorController extends Controller
         }
 
 
-        return redirect()->route('donor.show', ['id' => $donor->id]);
+        return redirect()->route('donor.show', ['donor' => $donor->id]);
     }
 
     public function export()

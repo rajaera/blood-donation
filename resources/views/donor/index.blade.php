@@ -71,8 +71,8 @@
                                 <td>{{  $donor->source_id ? $source::getSourceById($donor->source_id): '' }}</td>
                                 <td style="color: red;font-weight: bold;">{{ $donor->blood_group_id ? $bloodGroup::getNameById($donor->blood_group_id) : '' }}</td>
                                 <td>
-                                  <a class="btn btn-outline-secondary" href="{{ route('donor.show', $donor->id) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a>
-                                  <a class="btn btn-outline-secondary" href="{{ route('donor.edit', $donor->id) }}" role="button" title="Edit Donor"><i class="bi bi-pencil-fill"></i></a>  
+                                  <a class="btn btn-outline-secondary" href="{{ route('donor.show', ['donor' => $donor->id]) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a>
+                                  <a class="btn btn-outline-secondary" href="{{ route('donor.edit', ['donor' => $donor->id]) }}" role="button" title="Edit Donor"><i class="bi bi-pencil-fill"></i></a>  
                                 </td>                             
                               </tr>
                             @endforeach
