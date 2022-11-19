@@ -31,9 +31,11 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 
 Route::resource('blood-camp', BloodCampController::class)->except(['show']);
 
+//normal route define must come before route::resource, otherwise route may conflict
+Route::get('/donor/export',  [DonorController::class, 'export'])->name('donor.export');
 Route::resource('donor', DonorController::class);
-Route::get('/donor/export',  [App\Http\Controllers\DonorController::class, 'export'])->name('donor.export');
 
+//normal route define must come before route::resource, otherwise route may conflict
+Route::get('/camp-schedule/ongoingcamp/{schedule_id}',  [CampScheduleController::class, 'ongoingcamp'])->name('camp-schedule.ongoingcamp');
 Route::resource('camp-schedule', CampScheduleController::class);
 
-Route::get('/camp-schedule/ongoingcamp/{schedule_id}',  [App\Http\Controllers\CampScheduleController::class, 'ongoingcamp'])->name('camp-schedule.ongoingcamp');

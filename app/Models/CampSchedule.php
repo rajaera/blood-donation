@@ -27,4 +27,13 @@ class CampSchedule extends Model
     protected $attributes = [
         'camp_id' => 1        
     ];
+
+
+    /**
+     *@return BoodCamp
+     */
+    public function bloodCamp()
+    {
+        return $this->belongsTo(BloodCamp::class, 'camp_id');
+    }
 }

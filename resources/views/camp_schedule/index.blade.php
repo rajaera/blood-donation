@@ -1,6 +1,4 @@
-@inject('camp', 'App\Models\Camp')
 @extends('layouts.app')
-
 @php
   $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');      
 @endphp
@@ -30,15 +28,13 @@
                         <tbody>
                             @foreach ($campingSchedules as $schedule)
                               @php
-                                $counter = $loop->index + 1;  
-                                $campName = $camp::getCampNameById($schedule->camp_id);
-                                                         
+                                $counter = $loop->index + 1; 
                               @endphp
                             <tr>
                                 <th scope="row">   @if ($ongoing_camp_schedule_id == $schedule->id) <span style="color: red;" title="Ongoing Scheduled Camp"><i class="bi bi-play"></i></span> @endif </th>
                                 <th scope="row"> {{ $counter }} </th>                                
                                 <td>{{ $schedule->schedule_at }}</td>
-                                <td>{{ $campName }}</td>
+                                <td>{{ $schedule->bloodCamp->name }}</td>
                                 <td>{{ $schedule->title }}</td>
                                 <td>{{ $schedule->comment }}</td>
                                 <td>{{ $schedule->created_at }}</td>  

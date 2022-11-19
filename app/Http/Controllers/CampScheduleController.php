@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\BloodCamp;
 use App\Models\Camp;
 use App\Models\CampSchedule;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class CampScheduleController extends Controller {
     }
 
     public function create() {
-        $camps = Camp::getCamps();
+        $camps = BloodCamp::orderBy('schedule_at', 'ASC')->get();
         return view('camp_schedule.create', ['camps' => $camps]);
     }
 
@@ -54,7 +55,7 @@ class CampScheduleController extends Controller {
         $schedule->save();
 
 
-        return redirect()->route('camp-schedule');
+        return redirect()->route('camp-schedule.index');
     }
 
     public function show($id) {      

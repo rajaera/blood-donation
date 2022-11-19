@@ -18,8 +18,8 @@
                             <div class="col-md-6">
                                 <select id="camp_id" name="camp_id" type="text" class="form-control @error('camp_id') is-invalid @enderror" camp_id="camp_id" value="{{ old('camp_id') }}" required autocomplete="camp_id" autofocus>
                                     <option value="0">----Select Camp to Schedule----</option>
-                                    @foreach ($camps as $index => $name)
-                                        <option value="{{ $index }}">{{ $name }}</option>
+                                    @foreach ($camps as $camp)
+                                        <option value="{{ $camp->id }}">{{ $camp->name }}</option>
                                     @endforeach
                                 </select>
                                

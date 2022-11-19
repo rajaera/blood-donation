@@ -93,7 +93,7 @@ class DonorController extends Controller
         }
 
 
-        return redirect()->route('donor');
+        return redirect()->route('donor.index');
     }
 
     public function show($id)

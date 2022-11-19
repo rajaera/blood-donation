@@ -57,7 +57,7 @@ class BloodCampController extends Controller
 
         $camp->save();
 
-       return redirect()->route('blood-camp');
+       return redirect()->route('blood-camp.index');
     }
 
     /**
