@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBloodCamp;
 use App\Models\BloodCamp;
+use App\Models\CampSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class BloodCampController extends Controller
      */
     public function index()
     {        
-        return view('blood_camp.index', ['camps' =>  DB::table('blood_camps')->orderBy('name', 'ASC')->paginate(10)]);
+        return view('blood_camp.index', ['camps' =>  BloodCamp::orderBy('name', 'ASC')->paginate(10)]);
     }
 
     /**
@@ -56,6 +57,8 @@ class BloodCampController extends Controller
         $camp->created_by = Auth::id();
 
         $camp->save();
+
+        $request->session()->flash('status', "The camp [{$camp->name}] has been created successfully!");
 
        return redirect()->route('blood-camp.index');
     }
@@ -98,6 +101,7 @@ class BloodCampController extends Controller
         $camp->fill($validated);
         $camp->save();
 
+        $request->session()->flash('status', "The camp [{$camp->name}] has been updated successfully!");
        
         return redirect()->route('blood-camp.index');
     }
@@ -108,8 +112,23 @@ class BloodCampController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $camp = BloodCamp::findOrFail($id);
+        
+        //check camp is in use
+        $campSchedule = CampSchedule::where('camp_id', '=', $id)->first();
+        if($campSchedule) {
+            $request->session()->flash('status', "Cannot delete the camp [{$camp->name}], It has been scheduled.");
+        }
+
+        if(!$campSchedule) {
+            //soft delete
+            $camp->delete();
+            $request->session()->flash('status', "The camp [{$camp->name}] has been deleted successfully!");
+        }
+
+        return redirect()->route('blood-camp.index');
+        
     }
 }

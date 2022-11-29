@@ -31,7 +31,12 @@
                                 <td>{{ $camp->description }}</td>
                                 <td>{{ date('d/m/Y', strtotime($camp->created_at)) }}</td>                                
                                 <td>                                  
-                                  <a class="btn btn-outline-secondary" href="{{ route('blood-camp.edit', ['blood_camp' => $camp->id]) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
+                                  <a class="btn btn-outline-secondary d-inline" href="{{ route('blood-camp.edit', ['blood_camp' => $camp->id]) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
+                                  <form method="POST" action="{{ route('blood-camp.destroy', ['blood_camp' => $camp->id]) }}" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-secondary d-inline" role="button"><i class="bi bi-trash"></i></button>
+                                  </form>
                                 </td>                             
                               </tr>
                             @endforeach

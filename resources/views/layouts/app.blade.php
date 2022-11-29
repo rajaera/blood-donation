@@ -94,6 +94,11 @@
         </nav>
 
         <main class="py-4">
+            @if (session('status'))
+                <div class="alert alert-info" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>

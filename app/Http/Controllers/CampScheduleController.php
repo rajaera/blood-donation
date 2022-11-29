@@ -27,7 +27,7 @@ class CampScheduleController extends Controller {
     public function index() 
     {
         return view('camp_schedule.index', [
-            'campingSchedules' => CampSchedule::orderBy('schedule_at', 'DESC')->paginate(5)
+            'campingSchedules' => CampSchedule::orderBy('schedule_at', 'DESC')->paginate(15)
         ]);
     }
 
