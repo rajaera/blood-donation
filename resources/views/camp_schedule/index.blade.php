@@ -4,9 +4,9 @@
 @endphp
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Camping Schedules') }} <a href="{{ route('camp-schedule.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-alarm"></i>&nbsp;Schedule New Camp</a></div>
 
@@ -33,13 +33,21 @@
                             <tr>
                                 <th scope="row">   @if ($ongoing_camp_schedule_id == $schedule->id) <span style="color: red;" title="Ongoing Scheduled Camp"><i class="bi bi-play"></i></span> @endif </th>
                                 <th scope="row"> {{ $counter }} </th>                                
-                                <td>{{ $schedule->schedule_at }}</td>
+                                <td>{{ $schedule->schedule_at->format('d/m/Y') }}</td>
                                 <td>{{ $schedule->bloodCamp->name }}</td>
                                 <td>{{ $schedule->title }}</td>
                                 <td>{{ $schedule->comment }}</td>
-                                <td>{{ $schedule->created_at }}</td>  
+                                <td>{{ $schedule->created_at->format('d/m/Y') }}</td>  
                                 <td>{{ $schedule->is_done ? 'DONE' : 'YET' }}</td>   
-                                <td><a class="btn btn-outline-secondary" href="{{ route('camp-schedule.show', ['camp_schedule' => $schedule->id]) }}" role="button" title="View Schedule"><i class="bi bi-eye"></i></a></td>                             
+                                <td>
+                                  <a class="btn btn-outline-secondary btn-sm d-inline" href="{{ route('camp-schedule.show', ['camp_schedule' => $schedule->id]) }}" role="button" title="View Schedule"><i class="bi bi-eye"></i></a>
+                                  <a class="btn btn-outline-secondary btn-sm d-inline" href="{{ route('camp-schedule.edit', ['camp_schedule' => $schedule->id]) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  
+                                  <form method="POST" action="{{ route('camp-schedule.destroy', ['camp_schedule' => $schedule->id]) }}" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm d-inline" role="button"><i class="bi bi-trash"></i></button>
+                                  </form>
+                                </td>                             
                               </tr>
                             @endforeach
                           

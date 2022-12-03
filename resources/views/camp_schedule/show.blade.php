@@ -1,9 +1,7 @@
-@inject('camp', 'App\Models\Camp')
 @extends('layouts.app')
 
 @section('content')
-@php     
-    $campName = $camp::getCampNameById($schedule->camp_id);                            
+@php                      
     $ongoing_camp_schedule_id = session('ongoing_camp_schedule_id');                    
 @endphp
 <div class="container">
@@ -28,11 +26,11 @@
                         </tr>
                         <tr>
                             <th scope="col">Sheduled At</th>
-                            <th scope="row"> {{ $schedule->schedule_at }} </th>
+                            <th scope="row"> {{ $schedule->schedule_at->format('d/m/Y') }} </th>
                         </tr>
                         <tr>
                             <th scope="col">Camp</th>
-                            <th scope="row"> {{ $campName }} </th>
+                            <th scope="row"> {{ $schedule->bloodCamp->name }} </th>
                         </tr>
                         <tr>
                             <th scope="col">Title</th>
@@ -45,7 +43,7 @@
                         </tr>
                         <tr>
                             <th scope="col">Created At</th>
-                            <td>{{ $schedule->created_at }}</td>  
+                            <td>{{ $schedule->created_at->format('d/m/Y') }}</td>  
                         </tr>
                         <tr>
                             <th scope="col">Status</th>     

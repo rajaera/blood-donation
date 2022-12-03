@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('User List') }} <a href="{{ route('register') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register User</a></div>
+                <div class="card-header">{{ __('User List') }} <a href="{{ route('register') }}" class="btn btn-outline-secondary btn-sm float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register User</a></div>
 
                 <div class="card-body">
                     <table class="table">

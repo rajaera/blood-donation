@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBloodCamp extends FormRequest
+class StoreCampSchedule extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class StoreBloodCamp extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:5|max:100',
-            'description' => 'required|string|max:255',           
+            'camp_id' => 'required|integer|min:1',
+            'title' => 'required|string|min:5|max:100',
+            'schedule_at' => 'required|date',
+            'comment' => 'required|string:|min:5|max:255'               
         ];
     }
 }

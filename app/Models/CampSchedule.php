@@ -25,8 +25,10 @@ class CampSchedule extends Model
      * @var array
      */
     protected $attributes = [
-        'camp_id' => 1        
+        'is_done' => 0       
     ];
+
+    protected $dates = ['schedule_at'];
 
 
     /**

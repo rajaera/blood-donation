@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $progressingCampingSchedules = CampSchedule::where('is_done', '=', false)->get();
+        $progressingCampingSchedules = CampSchedule::where('is_done', '<>', 1)->orWhereNull('is_done')->get();
         return view('home', ['progressingCampingSchedules' => $progressingCampingSchedules]);
     }
 }

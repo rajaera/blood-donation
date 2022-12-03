@@ -9,8 +9,8 @@
             <div class="card">
                 <div class="card-header">
                   {{ __('Donor List') }} 
-                  <a href="{{ route('donor.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register Donor</a>
-                  <a href="{{ route('donor.export') }}" class="btn btn-outline-success float-right mr-1" role="button" aria-pressed="true"><i class="bi bi-file-spreadsheet-fill"></i>&nbsp;Export</a>
+                  <a href="{{ route('donor.create') }}" class="btn btn-outline-secondary btn-sm float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register Donor</a>
+                  <a href="{{ route('donor.export') }}" class="btn btn-outline-success btn-sm float-right mr-1" role="button" aria-pressed="true"><i class="bi bi-file-spreadsheet-fill"></i>&nbsp;Export</a>
                 </div>
                 <div class="card-body">
                   <div class="row  float-right">
@@ -23,13 +23,13 @@
                         <div class="form-group mb-2 mr-1">
                           <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             @foreach ($bloodGroup::getGroups() as $bgKey1 => $bgVal1)                                       
-                                <label class="form-control @error('blood_group_id') is-invalid @enderror btn btn-outline-danger" blood_group_id="blood_group_id">
+                                <label class="form-control @error('blood_group_id') is-invalid @enderror btn btn-outline-danger btn-sm" blood_group_id="blood_group_id">
                                     <input type="radio" name="blood_group_id" autocomplete="off" value="{{ $bgKey1 }}"  @if ($bloodGroupFilterId == $bgKey1) checked="checked"  @endif> {{ $bgVal1 }}
                                 </label>                                        
                             @endforeach
                           </div>
                         </div>                        
-                        <button type="submit" class="btn btn-outline-secondary mb-2 mr-1">Search</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-sm mb-2 mr-1">Search</button>
                       </form>
                     </div>
                   </div>
@@ -71,8 +71,8 @@
                                 <td>{{  $donor->source_id ? $source::getSourceById($donor->source_id): '' }}</td>
                                 <td style="color: red;font-weight: bold;">{{ $donor->blood_group_id ? $bloodGroup::getNameById($donor->blood_group_id) : '' }}</td>
                                 <td>
-                                  <a class="btn btn-outline-secondary" href="{{ route('donor.show', ['donor' => $donor->id]) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a>
-                                  <a class="btn btn-outline-secondary" href="{{ route('donor.edit', ['donor' => $donor->id]) }}" role="button" title="Edit Donor"><i class="bi bi-pencil-fill"></i></a>  
+                                  <a class="btn btn-outline-secondary btn-sm" href="{{ route('donor.show', ['donor' => $donor->id]) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a>
+                                  <a class="btn btn-outline-secondary btn-sm" href="{{ route('donor.edit', ['donor' => $donor->id]) }}" role="button" title="Edit Donor"><i class="bi bi-pencil-fill"></i></a>  
                                 </td>                             
                               </tr>
                             @endforeach

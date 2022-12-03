@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCampSchedule;
 use App\Models\BloodCamp;
-use App\Models\Camp;
 use App\Models\CampSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,28 +32,25 @@ class CampScheduleController extends Controller {
     }
 
     public function create() {
-        $camps = BloodCamp::orderBy('schedule_at', 'ASC')->get();
+        $camps = BloodCamp::orderBy('name', 'ASC')->get();
         return view('camp_schedule.create', ['camps' => $camps]);
     }
 
-    public function store(Request $request) {
-        $request->validate([
-            'camp_id' => 'required|integer',
-            'title' => 'required|string',
-            'schedule_at' => 'required|date',
-            'comment' => 'required|string:|min:5|max:255'            
-        ]);
+    public function store(StoreCampSchedule $request) {
+        
+
+        $validated = $request->validated();
+        
 
         $schedule = new CampSchedule();
-        $schedule->camp_id = $request->input('camp_id');
-        $schedule->title = $request->input('title');
-        $schedule->schedule_at = $request->input('schedule_at');
-        $schedule->comment = $request->input('comment');
+        $schedule->fill($validated);
+
         $schedule->created_by = Auth::id();
-        $schedule->is_done = false;
+        $schedule->is_done = null;
 
         $schedule->save();
 
+        $request->session()->flash('status', "New Schedule has been created successfully!");
 
         return redirect()->route('camp-schedule.index');
     }
@@ -77,5 +74,40 @@ class CampScheduleController extends Controller {
         }
         
         return redirect()->route('camp-schedule.show',['camp_schedule' => $id]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $schedule = CampSchedule::findOrFail($id);
+        $camps = BloodCamp::orderBy('name', 'ASC')->get();
+
+        return view('camp_schedule.edit', ['schedule' => $schedule, 'camps' => $camps]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(StoreCampSchedule $request, $id)
+    {
+
+        $schedule = CampSchedule::findOrFail($id);
+
+        $validated = $request->validated();
+        $schedule->fill($validated);
+        $schedule->save();
+
+        $request->session()->flash('status', "Schedule has been updated successfully!");
+       
+        return redirect()->route('camp-schedule.index');
     }
 }
