@@ -15,6 +15,7 @@
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
                             <th scope="col">Created At</th>
+                            <th scope="col">&nbsp;</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -24,11 +25,16 @@
                                 <th scope="row"> {{ $counter }} </th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at }}</td>
-                              </tr>
+                                <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                                <td>
+                                  <form method="POST" action="{{ route('user.destroy', ['user_id' => $user->id]) }}" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm d-inline" role="button"><i class="bi bi-trash"></i></button>
+                                  </form>
+                                </td>
+                            </tr>
                             @endforeach
-                          
-                          
                         </tbody>
                       </table>
                 </div>                

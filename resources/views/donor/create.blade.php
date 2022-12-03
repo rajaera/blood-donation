@@ -1,4 +1,4 @@
-@inject('camp', 'App\Models\Camp')
+@inject('camp', 'App\Models\BloodCamp')
 @inject('source', 'App\Models\Source')
 @inject('campSchedule', 'App\Models\CampSchedule')
 @inject('bloodGroup', 'App\Models\BloodGroup')

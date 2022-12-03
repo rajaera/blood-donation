@@ -9,7 +9,6 @@ use App\Models\BloodDonation;
 use App\Models\CampSchedule;
 use App\Models\Donor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -36,8 +35,7 @@ class DonorController extends Controller
         $bloodGroupFilterId =  $request->query('blood_group_id');
 
         if (!empty($filter)) {
-            $donors = DB::table('donors')
-                ->orWhere('first_name', 'like',  '%' . $filter . '%')
+            $donors = Donor::orWhere('first_name', 'like',  '%' . $filter . '%')
                 ->orWhere('last_name', 'like',  '%' . $filter . '%')
                 ->orWhere('contact_number', 'like', '%' . $filter . '%')
                 ->orWhere('address1', 'like', '%' . $filter . '%')
@@ -48,14 +46,13 @@ class DonorController extends Controller
         }
 
         if (!empty($bloodGroupFilterId)) {
-            $donors = DB::table('donors')
-                ->orWhere('blood_group_id', '=',  $bloodGroupFilterId)
+            $donors = Donor::orWhere('blood_group_id', '=',  $bloodGroupFilterId)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(10);
         }
 
         if (!isset($donors)) {
-            $donors = DB::table('donors')->orderBy('created_at', 'DESC')->paginate(10);
+            $donors = Donor::orderBy('created_at', 'DESC')->paginate(10);
         }
 
         return view('donor.index')->with('donors', $donors)->with('filter', $filter)->with('bloodGroupFilterId', $bloodGroupFilterId);
@@ -136,5 +133,24 @@ class DonorController extends Controller
     public function export()
     {
         return Excel::download(new ExportDonor, 'donors.xlsx');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $donor = Donor::findOrFail($id);
+        $donorText = implode(' ', array_filter([$donor->first_name, $donor->last_name]));
+            //soft delete
+            $donor->delete();
+            $request->session()->flash('status', "The donor [{$donorText}] has been deleted successfully!");
+       
+
+        return redirect()->route('donor.index');
+        
     }
 }

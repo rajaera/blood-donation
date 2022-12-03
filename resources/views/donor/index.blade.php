@@ -73,6 +73,11 @@
                                 <td>
                                   <a class="btn btn-outline-secondary btn-sm" href="{{ route('donor.show', ['donor' => $donor->id]) }}" role="button" title="View Donor"><i class="bi bi-eye"></i></a>
                                   <a class="btn btn-outline-secondary btn-sm" href="{{ route('donor.edit', ['donor' => $donor->id]) }}" role="button" title="Edit Donor"><i class="bi bi-pencil-fill"></i></a>  
+                                  <form method="POST" action="{{ route('donor.destroy', ['donor' => $donor->id]) }}" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm d-inline" role="button"><i class="bi bi-trash"></i></button>
+                                  </form>
                                 </td>                             
                               </tr>
                             @endforeach

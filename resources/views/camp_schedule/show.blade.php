@@ -10,10 +10,12 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Show Camping Schedule') }} 
+                    <a href="{{ route('camp-schedule.edit', ['camp_schedule' => $schedule->id]) }}" class="btn btn-outline-secondary btn-sm float-right ml-2" role="button" aria-pressed="true"><i class="bi bi-pencil-fill"></i>&nbsp;Update Schedule</a>
+                   
                     @if ($ongoing_camp_schedule_id == $schedule->id)
-                    <a href="{{ route('camp-schedule.ongoingcamp', ['schedule_id' => $schedule->id]) }}" class="btn btn-outline-danger float-right" role="button" aria-pressed="true"><i class="bi bi-play"></i></i>&nbsp;Ongoing Scheduled Camp</a>
+                    <a href="{{ route('camp-schedule.ongoingcamp', ['schedule_id' => $schedule->id]) }}" class="btn btn-outline-danger btn-sm float-right" role="button" aria-pressed="true"><i class="bi bi-play"></i></i>&nbsp;Ongoing Scheduled Camp</a>
                     @else
-                    <a href="{{ route('camp-schedule.ongoingcamp', ['schedule_id' => $schedule->id]) }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-alarm"></i>&nbsp;Set as Ongoing Scheduled Camp</a>
+                    <a href="{{ route('camp-schedule.ongoingcamp', ['schedule_id' => $schedule->id]) }}" class="btn btn-outline-secondary btn-sm float-right" role="button" aria-pressed="true"><i class="bi bi-alarm"></i>&nbsp;Set as Ongoing Scheduled Camp</a>
                     @endif
                     
                 </div>

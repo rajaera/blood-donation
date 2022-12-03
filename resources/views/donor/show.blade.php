@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Show Donor') }} 
-                    <a href="{{ route('donor.edit', ['donor' => $donor->id]) }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-pencil-fill"></i>&nbsp;Update Donor</a>
+                    <a href="{{ route('donor.edit', ['donor' => $donor->id]) }}" class="btn btn-outline-secondary btn-sm float-right" role="button" aria-pressed="true"><i class="bi bi-pencil-fill"></i>&nbsp;Update Donor</a>
                 </div>
 
                 <div class="card-body">

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                   {{ __('Camp List') }} 
-                  <a href="{{ route('blood-camp.create') }}" class="btn btn-outline-secondary float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register New Camp</a>                  
+                  <a href="{{ route('blood-camp.create') }}" class="btn btn-outline-secondary btn-sm float-right" role="button" aria-pressed="true"><i class="bi bi-plus"></i>&nbsp;Register New Camp</a>                  
                 </div>                
                 <div class="card-body">
                     <table class="table">
