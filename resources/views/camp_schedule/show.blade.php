@@ -47,7 +47,20 @@
                         </tr>
                         <tr>
                             <th scope="col">Status</th>     
-                            <td>{{ $schedule->is_done ? 'DONE' : 'YET' }}</td>
+                            <td>
+                                
+                                <form method="POST" action="{{ route('camp-schedule.statusToggle', ['schedule_id' => $schedule->id]) }}" class="d-inline">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm d-inline" role="button">
+                                        @if ($schedule->is_done)
+                                        <i style="color:green;" class="bi bi-check2-circle"></i>&nbsp;Mark as not done
+                                        @else
+                                        <i class="bi bi-hourglass-split"></i>&nbsp;Mark as done
+                                        @endif                                       
+                                    </button>
+                                </form>
+                            </td>
                         </tr>                        
                       </table>
                 </div> 

@@ -31,7 +31,7 @@
                         @if ($schedule->id == $ongoing_camp_schedule_id)
                         
                             <a href="{{ route('camp-schedule.show', ['camp_schedule' => $schedule->id]) }}" class="btn btn-outline-danger btn-lg mt-1" role="button" aria-pressed="true">
-                                <i class="bi bi-play-circle"></i>&nbsp;{{ $schedule->title }} sheduled @ {{  $bloodcamp ?  $bloodcamp->name : ''}} on {{ $schedule->schedule_at }}
+                                <i class="bi bi-play-circle"></i>&nbsp;{{ $schedule->title }} sheduled @ {{  $bloodcamp ?  $bloodcamp->name : ''}} on {{ $schedule->schedule_at->format('d/m/Y') }}
                             </a>
                         @else
                         <a href="{{ route('camp-schedule.show', ['camp_schedule' => $schedule->id]) }}" class="btn btn-outline-secondary btn-lg mt-1" role="button" aria-pressed="true">

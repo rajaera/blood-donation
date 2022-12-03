@@ -38,7 +38,13 @@
                                 <td>{{ $schedule->title }}</td>
                                 <td>{{ $schedule->comment }}</td>
                                 <td>{{ $schedule->created_at->format('d/m/Y') }}</td>  
-                                <td>{{ $schedule->is_done ? 'DONE' : 'YET' }}</td>   
+                                <td>
+                                  @if ($schedule->is_done)
+                                    <i style="color:green;" class="bi bi-check2-circle" title="Marked as done"></i>
+                                  @else
+                                    <i class="bi bi-hourglass-split" title="On progress"></i>
+                                  @endif
+                                </td>   
                                 <td>
                                   <a class="btn btn-outline-secondary btn-sm d-inline" href="{{ route('camp-schedule.show', ['camp_schedule' => $schedule->id]) }}" role="button" title="View Schedule"><i class="bi bi-eye"></i></a>
                                   <a class="btn btn-outline-secondary btn-sm d-inline" href="{{ route('camp-schedule.edit', ['camp_schedule' => $schedule->id]) }}" role="button" title="Edit Camp"><i class="bi bi-pencil-fill"></i></a>  

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCampSchedule;
 use App\Models\BloodCamp;
+use App\Models\BloodDonation;
 use App\Models\CampSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -109,5 +110,50 @@ class CampScheduleController extends Controller {
         $request->session()->flash('status', "Schedule has been updated successfully!");
        
         return redirect()->route('camp-schedule.index');
+    }
+
+    /**
+     * Toggle camp schedule status
+     * If same schedule camp id come as request it will be toggled
+     */
+    public function statusToggle(Request $request, $id) {        
+        
+        $schedule = CampSchedule::findOrFail($id);
+
+        $schedule->is_done = !$schedule->is_done;
+
+        $schedule->save();
+
+        $messageText = $schedule->is_done ? "Schedule '{$schedule->title}' of camp '{$schedule->bloodCamp->name}' has been marked as done!"  :  "Schedule '{$schedule->title}' of camp '{$schedule->bloodCamp->name}' has been marked as not done!";
+
+        $request->session()->flash('status', $messageText);
+        
+        return redirect()->route('camp-schedule.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $schedule = CampSchedule::findOrFail($id);
+        
+        //check camp is in use
+        $bloodDonation = BloodDonation::where('camp_schedule_id', '=', $id)->first();
+        if($bloodDonation) {
+            $request->session()->flash('status', "Cannot delete this schedule [{$schedule->title}], Donations have been allocated for this schedule.");
+        }
+
+        if(!$bloodDonation) {
+            //soft delete
+            $schedule->delete();
+            $request->session()->flash('status', "The schedule [{$schedule->title}] has been deleted successfully!");
+        }
+
+        return redirect()->route('camp-schedule.index');
+        
     }
 }

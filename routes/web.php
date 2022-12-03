@@ -37,5 +37,6 @@ Route::resource('donor', DonorController::class);
 
 //normal route define must come before route::resource, otherwise route may conflict
 Route::get('/camp-schedule/ongoingcamp/{schedule_id}',  [CampScheduleController::class, 'ongoingcamp'])->name('camp-schedule.ongoingcamp');
+Route::put('/camp-schedule/statusToggle/{schedule_id}',  [CampScheduleController::class, 'statusToggle'])->name('camp-schedule.statusToggle');
 Route::resource('camp-schedule', CampScheduleController::class);
 
